@@ -1,244 +1,312 @@
 ---
 
 title: SAP Website
-emoji: 🐠
+emoji: "🐠"
 colorFrom: red
 colorTo: green
 sdk: docker
 pinned: false
 -------------
 
-# SAP-Website: Photography & Studio Booking Platform
+# 📸 SAP Website — Photography & Studio Booking Platform
 
-**SAP-Website** is a full-stack photography gallery and studio booking platform designed to connect customers with professional photography studios.
+A full-stack photography gallery and professional studio booking platform that connects **photographers, creators, customers, and studio owners** in one place.
 
-The platform allows users to discover studios, explore portfolios, check studio information, request bookings, and leave reviews. Studio owners have their own dashboard where they can manage their studio profile, portfolio, and booking requests.
+Users can discover studios, explore photography portfolios, request bookings, leave reviews, and interact with an AI-powered assistant. Studio owners can manage their studio profiles, portfolios, and booking requests through the platform.
 
-> 🚧 **Project Status: Active Development**
->
-> SAP-Website is currently being actively developed and improved. Features, UI, database structure, and integrations may continue to change as the project evolves.
+> 🚧 **Status:** Active Development
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
-### 👤 Role-Based Authentication
+### 🔐 Role-Based Authentication
 
-The platform supports different types of users.
+The platform supports different user roles with dedicated functionality.
 
-#### Customers
+#### 👤 Customers
 
-Customers can:
-
-* Create an account
-* Browse photography studios
+* Create an account and log in securely
+* Browse available studios
 * Search and filter studios
-* View studio portfolios
-* Request studio bookings
+* View studio details and portfolios
+* Submit booking requests
 * Track booking status
-* Leave reviews and ratings
+* Leave ratings and reviews
+* Interact with the AI chatbot
 
-#### Studios / Hosts
+#### 🏢 Studio Owners / Hosts
 
-Studio owners can:
-
-* Create and manage their studio profile
-* Add studio information
-* Set pricing
-* Upload portfolio images
-* Manage portfolio content
-* View booking requests
-* Approve or reject bookings
-* Manage their studio presence
+* Create and manage studio profiles
+* Upload studio portfolio images
+* Manage studio information
+* View incoming booking requests
+* Approve or reject booking requests
+* Manage existing bookings
+* Maintain their studio presence on the platform
 
 ---
 
-## 🔎 Studio Discovery & Filtering
+## 🏢 Studio Discovery
 
-Users can discover studios using:
+Users can discover studios based on different categories and locations.
 
-* Search
+### Studio Categories
+
+* 👗 Fashion
+* 🎬 Cinema
+* 🔵 Cyclorama
+* 🏠 Loft
+* 📦 Product
+* 👤 Portrait
+
+Users can browse studio information including:
+
+* Studio name
 * Location
-* Studio category
+* Description
 * Pricing
-* Amenities
-* Photography type
-
-Supported studio categories include:
-
-* Fashion
-* Cinema
-* Cyclorama
-* Loft
-* Product
-* Portrait
-* And more
+* Category
+* Portfolio images
+* Ratings and reviews
+* Availability
 
 ---
 
-## 📅 Booking Management
+## 📅 Studio Booking System
 
-The platform provides an integrated booking system between customers and studios.
+The platform provides a booking-request workflow between customers and studio owners.
 
 ### Booking Flow
 
 ```text
 Customer
-   ↓
+   │
+   ▼
+Browse Studios
+   │
+   ▼
 Select Studio
-   ↓
+   │
+   ▼
 Choose Date & Hours
-   ↓
+   │
+   ▼
 Submit Booking Request
-   ↓
-Studio Receives Request
-   ↓
-Approve / Reject
-   ↓
+   │
+   ▼
+Studio Owner
+   │
+   ├── Approve
+   │
+   └── Reject
+   │
+   ▼
 Booking Status Updated
 ```
 
-Booking records include:
+### Booking Features
 
-* Customer
-* Studio
-* Booking date
-* Number of hours
-* Amount
-* Booking status
-* Request information
-
-Possible booking statuses include:
-
-```text
-Pending
-Confirmed
-Rejected
-Cancelled
-Completed
-```
+* Hour-based booking requests
+* Date selection
+* Booking duration
+* Booking status tracking
+* Studio approval/rejection
+* Booking notifications
+* Customer booking history
 
 ---
 
-## 📸 Portfolio & Gallery
+## 🖼️ Photography Portfolio
 
-Studio owners can showcase their photography work through their portfolio.
+Studio owners can showcase their work through image portfolios.
 
-Portfolio features include:
+Portfolio functionality includes:
 
 * Image uploads
-* Captions
-* Categories
-* Hashtags
 * Studio-specific galleries
-* AI-generated image insights
+* Photography showcases
 * Portfolio management
+* Image metadata processing
+
+Uploaded images can also be processed by the application's utility tools.
 
 ---
 
-## 🤖 AI & Utility Integrations
+# 🤖 AI & Utility Features
 
-SAP-Website includes several AI and utility features.
+The project includes several AI and utility components.
 
-### AI Image Tagging
+### 🏷️ AI Image Tagging
 
-`utils/ai_tags.py`
+Located at:
 
-Provides AI-powered image analysis and automatic tagging for uploaded photography.
+```text
+utils/ai_tags.py
+```
 
-### AI Chatbot
+This module analyzes uploaded images and generates relevant tags.
 
-`utils/chat_bot.py`
+Possible use cases include:
 
-Provides an integrated chatbot to assist users with questions and platform-related interactions.
+* Automatic image categorization
+* Photography style detection
+* Search optimization
+* Portfolio organization
 
-### EXIF Metadata
+---
 
-`utils/exif_reader.py`
+### 💬 AI Chatbot
 
-Extracts metadata from uploaded photography files, such as available camera and image information.
+Located at:
 
-### Notifications
+```text
+utils/chat_bot.py
+```
 
-`utils/notifications.py`
+The chatbot provides an interactive assistant for users.
 
-Handles notifications related to:
+It can be used for:
 
-* Booking requests
+* Studio discovery assistance
+* General platform questions
+* Booking-related guidance
+* User assistance
+
+---
+
+### 📷 EXIF Metadata Reader
+
+Located at:
+
+```text
+utils/exif_reader.py
+```
+
+The EXIF utility extracts metadata from uploaded photographs.
+
+Depending on the image, metadata can include:
+
+* Camera information
+* Lens information
+* Image dimensions
+* Capture date
+* Photography metadata
+
+---
+
+### 🔔 Notifications
+
+Located at:
+
+```text
+utils/notifications.py
+```
+
+The notification system can be used for events such as:
+
+* New booking requests
 * Booking approvals
 * Booking rejections
 * Booking status updates
+* Other platform notifications
 
 ---
 
-## ⭐ Reviews & Ratings
+# ⭐ Reviews & Ratings
 
-Customers can review studios they have booked.
+Customers can leave reviews after using a studio.
 
-Reviews include:
+The review system supports:
 
-* Rating
-* Review text
-* Customer information
-* Studio association
+* ⭐ Star ratings
+* Written reviews
+* Studio-specific reviews
+* Review display
+* Average studio ratings
 
-Studio ratings are aggregated to provide an overall rating for each studio.
+This helps customers evaluate studios before making a booking.
 
 ---
 
-# 🛠️ Technology Stack
+# 🛠️ Tech Stack
 
-| Layer          | Technology                   |
-| -------------- | ---------------------------- |
-| Backend        | Python 3, Flask              |
-| Database       | SQLite / PostgreSQL          |
-| ORM            | SQLAlchemy                   |
-| Frontend       | HTML5, CSS3, Jinja2          |
-| Authentication | Flask Sessions + Werkzeug    |
-| AI             | Python-based AI integrations |
-| Deployment     | Docker / Hugging Face Spaces |
+## Backend
 
-### Database
+* 🐍 Python 3
+* 🌐 Flask
+* 🗄️ Flask-SQLAlchemy
+* 🔐 Werkzeug
+* 🔑 Flask Sessions
 
-SQLite is used by default for local development.
+## Frontend
 
-For production, the application can be configured to use PostgreSQL through:
+* HTML5
+* CSS3
+* Jinja2 Templates
+* JavaScript
+
+## Database
+
+### Development
+
+```text
+SQLite
+```
+
+### Production
+
+```text
+PostgreSQL
+```
+
+The production database can be configured using:
 
 ```text
 DATABASE_URL
 ```
 
+## AI / Utilities
+
+* AI image analysis
+* Automatic image tagging
+* Chatbot
+* EXIF metadata extraction
+* Notification utilities
+
+## Deployment
+
+* Docker
+* Flask
+* PostgreSQL
+
 ---
 
-# 📂 Project Structure
+# 📁 Project Structure
 
 ```text
 SAP-Website/
 │
-├── app.py                    # Main Flask application
-├── models.py                 # SQLAlchemy database models
-├── init_db.py                # Database initialization
-├── update_db.py              # Database updates / migrations
-├── database.db               # Local SQLite database
+├── app.py
+├── models.py
+├── init_db.py
+├── update_db.py
+├── database.db
 │
 ├── static/
-│   ├── image/                # Static images and assets
-│   └── uploads/              # Uploaded portfolio images
+│   ├── image/
+│   └── uploads/
 │
-├── templates/                # Jinja2 templates
-│   ├── base.html
-│   ├── auth/
-│   ├── dashboards/
-│   └── ...
+├── templates/
 │
 ├── utils/
-│   ├── ai_tags.py            # AI image analysis and tagging
-│   ├── chat_bot.py           # AI chatbot
-│   ├── exif_reader.py        # EXIF metadata extraction
-│   └── notifications.py     # Notification utilities
+│   ├── ai_tags.py
+│   ├── chat_bot.py
+│   ├── exif_reader.py
+│   └── notifications.py
 │
-├── requirements.txt          # Python dependencies
-├── Dockerfile                # Docker configuration
+├── requirements.txt
+├── Dockerfile
 └── README.md
 ```
 
@@ -248,134 +316,165 @@ SAP-Website/
 
 The application uses SQLAlchemy ORM for database management.
 
-### Users
+## Users
 
-Stores:
+Stores registered platform users.
 
-* Authentication credentials
-* User role
-* Basic user information
+```text
+Users
+├── id
+├── name
+├── email
+├── password
+└── role
+```
 
-Supported roles:
+Roles may include:
 
 ```text
 customer
 studio
 ```
 
-### Studios
+---
 
-Stores:
+## Studios
 
-* Studio information
-* Owner
-* Pricing
-* Location
-* Category
-* Amenities
-* Description
+Stores professional studio information.
 
-### Portfolios
-
-Stores:
-
-* Studio association
-* Image URLs
-* Captions
-* Categories
-* Hashtags
-* AI-generated information
-
-### Bookings
-
-Stores:
-
-* Customer
-* Studio
-* Date
-* Hours
-* Amount
-* Status
-* Booking information
-
-### Reviews
-
-Stores:
-
-* Customer
-* Studio
-* Rating
-* Review text
-* Review information
+```text
+Studios
+├── id
+├── owner_id
+├── name
+├── location
+├── category
+├── description
+├── price
+└── availability
+```
 
 ---
 
-# 💻 Local Setup & Development
+## Portfolios
+
+Stores studio photography portfolio content.
+
+```text
+Portfolios
+├── id
+├── studio_id
+├── image
+├── title
+└── description
+```
+
+---
+
+## Bookings
+
+Stores customer booking requests.
+
+```text
+Bookings
+├── id
+├── user_id
+├── studio_id
+├── date
+├── start_time
+├── end_time
+└── status
+```
+
+Booking statuses may include:
+
+```text
+pending
+approved
+rejected
+completed
+cancelled
+```
+
+---
+
+## Reviews
+
+Stores customer feedback.
+
+```text
+Reviews
+├── id
+├── user_id
+├── studio_id
+├── rating
+├── comment
+└── created_at
+```
+
+---
+
+# 🚀 Getting Started
 
 ## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/AryanPatel-AI/SAP-Website.git
+```
 
+```bash
 cd SAP-Website
 ```
 
+---
+
 ## 2. Create a Virtual Environment
 
-You can create your own Python virtual environment:
+### macOS / Linux
 
 ```bash
 python3 -m venv venv
 ```
 
-Activate it on macOS/Linux:
+Activate it:
 
 ```bash
 source venv/bin/activate
 ```
 
-On Windows:
+### Windows
 
-```powershell
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+```bash
 venv\Scripts\activate
 ```
 
+---
+
 ## 3. Install Dependencies
 
-If `requirements.txt` is available:
+If `requirements.txt` exists:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Otherwise:
+Or install the main dependencies manually:
 
 ```bash
 pip install Flask Flask-SQLAlchemy Werkzeug
 ```
 
-Additional dependencies may be required for AI, image processing, EXIF extraction, and other integrations.
+---
 
-## 4. Configure Environment Variables
+# 🗄️ Database Setup
 
-Create a `.env` file if required by the application.
-
-Example:
-
-```env
-DATABASE_URL=sqlite:///database.db
-SECRET_KEY=your-secret-key
-```
-
-For production PostgreSQL:
-
-```env
-DATABASE_URL=postgresql://username:password@host:port/database
-```
-
-> Do not commit real secrets, API keys, passwords, or production credentials to GitHub.
-
-## 5. Initialize the Database
+Initialize the database:
 
 ```bash
 python init_db.py
@@ -387,7 +486,17 @@ If database updates are required:
 python update_db.py
 ```
 
-## 6. Run the Application
+The default development database is:
+
+```text
+database.db
+```
+
+---
+
+# ▶️ Run the Application
+
+Start the Flask application:
 
 ```bash
 python app.py
@@ -396,18 +505,22 @@ python app.py
 The application will normally be available at:
 
 ```text
-http://localhost:5002
+http://127.0.0.1:5002
 ```
 
-The port can be changed through the application's configuration/environment variables.
+or:
+
+```text
+http://localhost:5002
+```
 
 ---
 
 # 🐳 Docker
 
-SAP-Website also includes Docker support.
+The project can also be deployed using Docker.
 
-Build the Docker image:
+Build the image:
 
 ```bash
 docker build -t sap-website .
@@ -419,158 +532,148 @@ Run the container:
 docker run -p 5002:5002 sap-website
 ```
 
-For production deployment, configure the required environment variables and database connection appropriately.
+The application can then be accessed at:
+
+```text
+http://localhost:5002
+```
 
 ---
 
-# 🤖 AI Agent / LLM Development Context
+# 🔑 Environment Variables
 
-If an AI coding assistant such as ChatGPT, Claude, or Gemini is helping develop this project, the following conventions should be followed.
+For production deployments, configure environment variables as required.
 
-### Backend
+Example:
 
-The primary backend logic is located in:
+```env
+DATABASE_URL=postgresql://username:password@localhost:5432/sap_website
+SECRET_KEY=your-secret-key
+```
+
+Additional AI or external-service credentials can be configured through environment variables when required by the corresponding utility modules.
+
+> ⚠️ Never commit API keys, passwords, secret keys, or production database credentials to Git.
+
+---
+
+# 🤖 AI Agent Development Context
+
+This project is a **Python + Flask application**.
+
+When making backend changes:
 
 ```text
 app.py
 models.py
+utils/
 ```
 
-Before modifying routes or database functionality, inspect the existing implementation and follow the established patterns.
-
-### Database
-
-Database models are defined in:
+When changing database models:
 
 ```text
 models.py
-```
-
-When modifying models, check whether the existing database requires an update or migration.
-
-Relevant scripts:
-
-```text
-init_db.py
 update_db.py
+init_db.py
 ```
 
-### Frontend
-
-Frontend templates are located in:
+When changing the frontend:
 
 ```text
 templates/
-```
-
-The project uses **Jinja2** templates.
-
-Before creating new pages, inspect:
-
-```text
-templates/base.html
-```
-
-and follow the existing layout and styling conventions.
-
-### Static Files
-
-Static assets are located in:
-
-```text
 static/
 ```
 
-Uploaded portfolio images are stored under:
+### Important
+
+This project does **not** use Node.js as its primary backend runtime.
+
+Do not use commands such as:
+
+```bash
+npm install
+npm run dev
+pnpm install
+```
+
+unless a future frontend/build system explicitly introduces Node.js dependencies.
+
+The main application is started with:
+
+```bash
+python app.py
+```
+
+---
+
+# 🔒 Security
+
+The project uses Flask and Werkzeug security features for authentication and password handling.
+
+Recommended production practices include:
+
+* Use strong secret keys
+* Hash passwords securely
+* Validate uploaded files
+* Restrict upload file types
+* Protect authenticated routes
+* Use environment variables for secrets
+* Enable HTTPS in production
+* Use PostgreSQL for production deployments
+* Implement appropriate authorization checks
+* Avoid exposing sensitive EXIF metadata
+* Never commit credentials to Git
+
+---
+
+# 🧪 Development
+
+For local development:
+
+```bash
+python app.py
+```
+
+After modifying database models, update the database using the appropriate database initialization or migration workflow.
+
+Keep uploaded media inside the configured upload directory:
 
 ```text
 static/uploads/
 ```
 
-### Important
-
-This application is a **Python/Flask application**.
-
-Do not use Node.js development commands such as:
-
-```bash
-npm run dev
-```
-
-unless a future part of the project explicitly introduces a Node.js frontend/build system.
-
 ---
 
-# 🚧 Roadmap
+# 🗺️ Roadmap
 
-### Core Platform
+Future improvements may include:
 
-* [x] Flask application
-* [x] User authentication
-* [x] Customer accounts
-* [x] Studio accounts
-* [x] Studio discovery
-* [x] Studio filtering
-* [x] Portfolio management
-* [x] Booking system
-* [x] Reviews & ratings
-* [x] AI utilities
-* [x] Chatbot integration
-* [x] EXIF extraction
-* [x] Notifications
-
-### In Development
-
-* [ ] Improved studio discovery
-* [ ] Advanced booking management
-* [ ] Better portfolio management
-* [ ] Improved AI image analysis
-* [ ] AI-powered recommendations
-* [ ] Advanced studio dashboard
-* [ ] Customer dashboard improvements
-* [ ] PostgreSQL production configuration
-* [ ] Improved notification system
-* [ ] Production optimization
-
-### Future
-
+* [ ] Advanced studio search
+* [ ] Availability calendar
+* [ ] Real-time booking availability
 * [ ] Online payments
-* [ ] Advanced availability calendar
-* [ ] Private client galleries
-* [ ] High-resolution photo delivery
 * [ ] Photographer profiles
-* [ ] Advanced analytics
+* [ ] Advanced AI image tagging
+* [ ] AI-powered studio recommendations
+* [ ] Improved chatbot
+* [ ] Email notifications
+* [ ] SMS notifications
+* [ ] Real-time notifications
+* [ ] Studio analytics dashboard
+* [ ] Admin dashboard
+* [ ] PostgreSQL production optimization
+* [ ] Cloud image storage
+* [ ] Image moderation
 * [ ] Mobile application
-* [ ] Advanced AI photography tools
+* [ ] Advanced review moderation
 
 ---
 
-# 🔐 Security
+# 📊 Project Status
 
-For production deployment, make sure to:
+🟢 **Active Development**
 
-* Use strong secret keys
-* Store secrets in environment variables
-* Never commit API keys
-* Never commit database credentials
-* Use HTTPS
-* Configure secure sessions
-* Validate uploaded files
-* Restrict upload sizes
-* Use PostgreSQL for production
-* Keep dependencies updated
-
----
-
-# 📌 Project Status
-
-**🟢 Active Development**
-
-SAP-Website is currently a working project and is actively being developed.
-
-The core platform is functional, while additional features, improvements, integrations, and production optimizations are being added continuously.
-
-The architecture and APIs may change during development.
+The project is continuously being improved with new booking, photography, AI, and studio-management features.
 
 ---
 
@@ -578,7 +681,7 @@ The architecture and APIs may change during development.
 
 **Aryan Patel**
 
-Designed, developed, and maintained by **Aryan Patel**.
+SAP Website is designed, developed, and maintained by **Aryan Patel**.
 
 ---
 
@@ -590,14 +693,24 @@ License information will be added upon public release.
 
 Until an official license is provided, all rights are reserved by the author.
 
-**Copyright © 2026 Aryan Patel.**
+Copyright © 2026 **Aryan Patel**.
 
 ---
 
-## 🌐 Project
+# ⭐ Contributing
 
-**GitHub:** `AryanPatel-AI/SAP-Website`
+The project is currently under active development.
 
-**Status:** 🟢 Active Development
+Contribution guidelines will be added as the project approaches a public release.
 
-> Building a modern photography and studio booking experience with Flask, AI, and a focus on scalable studio management.
+---
+
+# 📞 Contact
+
+For questions, suggestions, or collaboration related to the project, please open an issue in the repository.
+
+---
+
+## 🚀 Built for Photographers & Creators
+
+**SAP Website** aims to make it easier for photographers, creators, customers, and studio owners to discover, showcase, and book professional photography spaces.
