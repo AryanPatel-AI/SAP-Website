@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% block title %}Main Hub - Studioza Navigation & Directory{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <!-- Hub Header Banner -->
+    <div class="relative overflow-hidden rounded-3xl p-8 md:p-12 mb-12 border border-zinc-800/80 bg-gradient-to-r from-zinc-950 via-zinc-900 to-zinc-950 shadow-2xl">
+        <!-- Dual-Tone Ambient Glow Inside Header -->
+        <div class="pointer-events-none absolute -top-24 -left-24 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl"></div>
+        <div class="pointer-events-none absolute -bottom-24 -right-24 w-96 h-96 bg-orange-600/20 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-teal-500/30 text-teal-400 text-xs font-bold uppercase tracking-wider mb-4">
+                <i class="fas fa-th-large text-orange-400"></i> Studioza Main Directory
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-serif mb-4 leading-tight">
+                Explore the Creative <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-teal-300 to-orange-400">
+                    Ecosystem & Portals
+                </span>
+            </h1>
+            <p class="text-zinc-300 text-base md:text-lg mb-8 leading-relaxed font-light">
+                Welcome to your central launchpad. Browse verified rental studios, review photography specialties, learn about our production gear, or manage your bookings.
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+                <a href="{{ url_for('list_studios') }}" class="btn-primary px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 shadow-lg">
+                    <i class="fas fa-store"></i> Browse All Studios
+                </a>
+                <a href="{{ url_for('categories') }}" class="btn-warm px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 shadow-lg">
+                    <i class="fas fa-layer-group"></i> Photography Categories
+                </a>
+                <a href="{{ url_for('contact') }}" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 transition-colors">
+                    <i class="fas fa-envelope"></i> Concierge Inquiry
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Hub Section: Prominent Hyperlinks to All Separate Pages -->
+    <div class="mb-16">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-bold text-white font-serif flex items-center gap-3">
+                    <span class="w-3 h-8 rounded-full bg-gradient-to-b from-teal-400 to-orange-500"></span>
+                    Directory of Pages & Services
+                </h2>
+                <p class="text-zinc-400 text-sm mt-1">Direct hyperlinks to every section and portal of Studioza</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Card 1: Explore Studios -->
+            <a href="{{ url_for('list_studios') }}" class="glass-card rounded-2xl p-7 flex flex-col justify-between group border border-zinc-800/90 hover:border-teal-400/50 hover:shadow-[0_0_30px_rgba(20,184,166,0.15)] transition-all duration-300">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-14 h-14 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-teal-500 group-hover:text-zinc-950 transition-all duration-300">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20">
+                            Catalogue
+                        </span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-serif mb-2 group-hover:text-teal-400 transition-colors">
+                        Explore Studios &rarr;
+                    </h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        Browse premium soundstages, daylight lofts, and cyclorama-equipped photography spaces with full amenities.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-semibold text-teal-400 group-hover:text-teal-300">
+                    <span>View all listings</span>
+                    <i class="fas fa-arrow-right transform group-hover:translate-x-1.5 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- Card 2: Categories -->
+            <a href="{{ url_for('categories') }}" class="glass-card rounded-2xl p-7 flex flex-col justify-between group border border-zinc-800/90 hover:border-orange-500/50 hover:shadow-[0_0_30px_rgba(234,88,12,0.15)] transition-all duration-300">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-14 h-14 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-zinc-950 transition-all duration-300">
+                            <i class="fas fa-shapes"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-orange-500/10 text-orange-300 border border-orange-500/20">
+                            Specialties
+                        </span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-serif mb-2 group-hover:text-orange-400 transition-colors">
+                        Photography Categories &rarr;
+                    </h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        Discover tailored studios by category: Weddings, High Fashion, Commercial Products, Vehicles, and Film.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-semibold text-orange-400 group-hover:text-orange-300">
+                    <span>Explore genres</span>
+                    <i class="fas fa-arrow-right transform group-hover:translate-x-1.5 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- Card 3: About Page -->
+            <a href="{{ url_for('about') }}" class="glass-card rounded-2xl p-7 flex flex-col justify-between group border border-zinc-800/90 hover:border-teal-400/50 hover:shadow-[0_0_30px_rgba(20,184,166,0.15)] transition-all duration-300">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-14 h-14 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-teal-500 group-hover:text-zinc-950 transition-all duration-300">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20">
+                            Vision & Gear
+                        </span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-serif mb-2 group-hover:text-teal-400 transition-colors">
+                        About Studioza &rarr;
+                    </h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        Learn about our founding philosophy, Canon optical gear benchmarks, quality verification, and platform story.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-semibold text-teal-400 group-hover:text-teal-300">
+                    <span>Read our story</span>
+                    <i class="fas fa-arrow-right transform group-hover:translate-x-1.5 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- Card 4: My Bookings / Dashboard -->
+            <a href="{{ url_for('dashboard') }}" class="glass-card rounded-2xl p-7 flex flex-col justify-between group border border-zinc-800/90 hover:border-orange-500/50 hover:shadow-[0_0_30px_rgba(234,88,12,0.15)] transition-all duration-300">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-14 h-14 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-zinc-950 transition-all duration-300">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-orange-500/10 text-orange-300 border border-orange-500/20">
+                            Portal
+                        </span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-serif mb-2 group-hover:text-orange-400 transition-colors">
+                        My Bookings & Portal &rarr;
+                    </h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        View upcoming photoshoot appointments, track studio approval status, and manage active booking schedules.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-semibold text-orange-400 group-hover:text-orange-300">
+                    <span>Manage reservations</span>
+                    <i class="fas fa-arrow-right transform group-hover:translate-x-1.5 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- Card 5: Register Studio -->
+            <a href="{{ url_for('register') }}" class="glass-card rounded-2xl p-7 flex flex-col justify-between group border border-zinc-800/90 hover:border-teal-400/50 hover:shadow-[0_0_30px_rgba(20,184,166,0.15)] transition-all duration-300">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-14 h-14 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-teal-500 group-hover:text-zinc-950 transition-all duration-300">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20">
+                            Owners
+                        </span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-serif mb-2 group-hover:text-teal-400 transition-colors">
+                        List Your Studio &rarr;
+                    </h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        Join Studioza as a studio host. Showcase your space, utilize AI auto-tagging, and earn direct booking revenue.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-semibold text-teal-400 group-hover:text-teal-300">
+                    <span>Register space</span>
+                    <i class="fas fa-arrow-right transform group-hover:translate-x-1.5 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- Card 6: Contact & Concierge -->
+            <a href="{{ url_for('contact') }}" class="glass-card rounded-2xl p-7 flex flex-col justify-between group border border-zinc-800/90 hover:border-orange-500/50 hover:shadow-[0_0_30px_rgba(234,88,12,0.15)] transition-all duration-300">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-14 h-14 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-zinc-950 transition-all duration-300">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-orange-500/10 text-orange-300 border border-orange-500/20">
+                            Support
+                        </span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-serif mb-2 group-hover:text-orange-400 transition-colors">
+                        Contact & Concierge &rarr;
+                    </h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                        Require specialized production equipment or multi-day booking coordination? Contact our support concierge.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-semibold text-orange-400 group-hover:text-orange-300">
+                    <span>Get in touch</span>
+                    <i class="fas fa-arrow-right transform group-hover:translate-x-1.5 transition-transform"></i>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Featured Studios Showcase Preview (Hyperlinked to Studio Details) -->
+    <div class="mb-12 border-t border-zinc-800/80 pt-12">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+            <div>
+                <div class="text-xs font-bold tracking-widest text-teal-400 uppercase mb-1">Live Spaces Available</div>
+                <h2 class="text-3xl font-bold text-white font-serif">Featured Studios on Platform</h2>
+            </div>
+            <a href="{{ url_for('list_studios') }}" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-bold flex items-center gap-2">
+                <span>View All Studios</span>
+                <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for studio in studios %}
+            <div class="glass-card rounded-2xl overflow-hidden group border border-zinc-800/80 hover:border-teal-500/40 transition-all">
+                <div class="relative h-60 overflow-hidden">
+                    {% if studio.cover_image %}
+                        <img src="{{ studio.cover_image }}" alt="{{ studio.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    {% else %}
+                        <div class="w-full h-full bg-zinc-900 flex items-center justify-center text-zinc-600">
+                            <i class="fas fa-camera text-4xl"></i>
+                        </div>
+                    {% endif %}
+                    <div class="absolute top-4 right-4 bg-zinc-950/90 backdrop-blur text-teal-400 px-3 py-1.5 rounded-full text-xs font-bold border border-teal-500/30 shadow-lg font-mono">
+                        ₹{{ studio.price_per_hour|int }}/hr
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-xl font-bold text-white font-serif mb-2">{{ studio.name }}</h4>
+                    <p class="text-zinc-400 text-sm line-clamp-2 mb-4">{{ studio.description }}</p>
+                    
+                    <div class="flex items-center justify-between pt-4 border-t border-zinc-800 text-xs">
+                        <span class="text-zinc-400 flex items-center gap-1.5 truncate max-w-[190px]" title="{{ studio.location }}">
+                            <i class="fas fa-map-marker-alt text-rose-400 flex-shrink-0"></i> {{ studio.location }}
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-orange-400 font-bold bg-orange-500/10 px-1.5 py-0.5 rounded border border-orange-500/20 text-[11px]"><i class="fas fa-star text-[9px] mr-1"></i>{{ studio.average_rating }}</span>
+                            <a href="{{ url_for('studio_detail', studio_id=studio.id) }}" class="text-teal-400 hover:text-teal-300 font-bold text-xs flex items-center gap-1">
+                                View &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% block title %}Studio Dashboard - Studioza{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Studio Header Profile -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 mb-10 flex flex-col md:flex-row items-center gap-6 border border-zinc-800 shadow-xl">
+        <div class="w-24 h-24 rounded-2xl bg-zinc-900 flex items-center justify-center text-4xl overflow-hidden border border-zinc-700 flex-shrink-0">
+            {% if studio.cover_image %}
+                <img src="{{ studio.cover_image }}" alt="{{ studio.name }}" class="w-full h-full object-cover">
+            {% else %}
+                <i class="fas fa-camera text-zinc-500"></i>
+            {% endif %}
+        </div>
+        <div class="flex-grow text-center md:text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold mb-1">
+                Studio Host Portal
+            </div>
+            <h1 class="text-3xl font-extrabold text-white font-serif mb-1">{{ studio.name }}</h1>
+            <p class="text-zinc-400 text-xs sm:text-sm font-medium">
+                <i class="fas fa-location-dot text-rose-400 mr-1"></i> {{ studio.city or studio.location }} 
+                &nbsp;|&nbsp; 
+                <span class="text-teal-400 font-mono font-bold"><i class="fas fa-indian-rupee-sign text-xs mr-0.5"></i>{{ studio.price_per_hour|int }}/hr</span>
+                &nbsp;|&nbsp; 
+                <span class="text-orange-400 font-semibold"><i class="fas fa-star text-xs mr-0.5"></i>{{ studio.average_rating }} Rating</span>
+            </p>
+        </div>
+        <div class="flex-shrink-0">
+            <a href="{{ url_for('studio_detail', studio_id=studio.id) }}" class="btn-dual text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition-all flex items-center gap-2">
+                <i class="fas fa-eye text-xs"></i> View Public Listing
+            </a>
+        </div>
+    </div>
+
+    <!-- AI Portfolio Upload -->
+    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-zinc-800 mb-10 shadow-xl">
+        <h2 class="text-xl font-bold text-white flex items-center gap-3 mb-1 font-serif">
+            <i class="fas fa-wand-magic-sparkles text-teal-400"></i> AI Portfolio Upload & Analysis
+        </h2>
+        <p class="text-zinc-400 mb-6 text-xs">Upload a photograph from your studio. Gemini AI will automatically categorize it, extract photography metadata, and craft captions!</p>
+        
+        <form action="{{ url_for('upload_portfolio') }}" method="POST" enctype="multipart/form-data" class="flex flex-col sm:flex-row gap-4 items-center">
+            <div class="flex-grow w-full">
+                <input type="file" name="photo" accept="image/*" required class="block w-full text-xs text-zinc-400
+                    file:mr-4 file:py-2.5 file:px-5
+                    file:rounded-xl file:border-0
+                    file:text-xs file:font-bold
+                    file:bg-teal-600 file:text-white
+                    hover:file:bg-teal-500
+                    transition-all file:cursor-pointer bg-zinc-900/80 border border-zinc-700 rounded-xl">
+            </div>
+            <button type="submit" class="w-full sm:w-auto btn-dual px-7 py-3 rounded-xl font-bold text-xs text-white shadow-lg flex-shrink-0 cursor-pointer">
+                <i class="fas fa-upload mr-1.5"></i> Upload & Analyze
+            </button>
+        </form>
+    </div>
+
+    <!-- Incoming Bookings -->
+    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-zinc-800 mb-10 shadow-xl">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h2 class="text-xl font-bold text-white flex items-center gap-3 font-serif">
+                    <i class="fas fa-bell-concierge text-orange-400"></i> Incoming Booking Requests
+                </h2>
+                <p class="text-xs text-zinc-400 mt-0.5">Manage customer sessions and view incoming deposits in ₹ INR.</p>
+            </div>
+            <div class="bg-teal-500/10 text-teal-300 px-3 py-1 rounded-full text-xs font-bold border border-teal-500/30">
+                {{ bookings|length }} Total Bookings
+            </div>
+        </div>
+
+        {% if bookings %}
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-zinc-800 text-zinc-400 text-xs uppercase tracking-wider">
+                        <th class="pb-3 font-semibold pl-4">Customer</th>
+                        <th class="pb-3 font-semibold">Shoot Date</th>
+                        <th class="pb-3 font-semibold">Total (₹)</th>
+                        <th class="pb-3 font-semibold text-center">Status</th>
+                        <th class="pb-3 font-semibold text-right pr-4">Host Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-800 text-xs">
+                    {% for booking in bookings %}
+                    <tr class="hover:bg-zinc-800/30 transition-colors">
+                        <td class="py-4 pl-4">
+                            <div class="font-bold text-white text-sm">{{ booking.customer.name }}</div>
+                            <div class="text-[11px] text-zinc-400"><i class="fas fa-phone text-zinc-500 mr-1"></i> {{ booking.customer.phone or 'N/A' }}</div>
+                        </td>
+                        <td class="py-4 text-zinc-300">
+                            <div><i class="far fa-calendar text-teal-400 mr-1"></i> {{ booking.booking_date }}</div>
+                            <div class="text-zinc-500 text-[11px]">{{ booking.hours }} Hours</div>
+                        </td>
+                        <td class="py-4 font-mono font-bold text-teal-400 text-sm">
+                            ₹{{ booking.total_amount|int }}
+                        </td>
+                        <td class="py-4 text-center">
+                            {% if booking.status == 'pending' %}
+                                <span class="inline-flex px-2.5 py-1 rounded text-[10px] font-bold bg-zinc-800 text-zinc-300 border border-zinc-700">Pending</span>
+                            {% elif booking.status == 'confirmed' %}
+                                <span class="inline-flex px-2.5 py-1 rounded text-[10px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40">Confirmed</span>
+                            {% elif booking.status == 'completed' %}
+                                <span class="inline-flex px-2.5 py-1 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Completed</span>
+                            {% else %}
+                                <span class="inline-flex px-2.5 py-1 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">Rejected</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-4 text-right pr-4">
+                            {% if booking.status == 'pending' %}
+                            <div class="flex items-center justify-end gap-1.5">
+                                <form action="{{ url_for('update_booking', booking_id=booking.id) }}" method="POST">
+                                    <input type="hidden" name="status" value="confirmed">
+                                    <button type="submit" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-2.5 py-1 rounded text-xs transition-colors">
+                                        Accept
+                                    </button>
+                                </form>
+                                <form action="{{ url_for('update_booking', booking_id=booking.id) }}" method="POST">
+                                    <input type="hidden" name="status" value="rejected">
+                                    <button type="submit" class="bg-rose-600/80 hover:bg-rose-600 text-white font-bold px-2.5 py-1 rounded text-xs transition-colors">
+                                        Decline
+                                    </button>
+                                </form>
+                            </div>
+                            {% elif booking.status == 'confirmed' %}
+                            <form action="{{ url_for('update_booking', booking_id=booking.id) }}" method="POST" class="inline-block">
+                                <input type="hidden" name="status" value="completed">
+                                <button type="submit" class="bg-zinc-800 hover:bg-zinc-700 text-teal-400 border border-zinc-700 font-bold px-2.5 py-1 rounded text-xs transition-colors">
+                                    Mark Finished
+                                </button>
+                            </form>
+                            {% else %}
+                            <span class="text-zinc-500 text-[11px]">Closed</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-10 text-zinc-500 text-xs">
+            No incoming bookings yet. Make sure your studio portfolio and equipment tags are up to date!
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Customer Reviews Received -->
+    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-zinc-800 shadow-xl">
+        <h2 class="text-xl font-bold text-white flex items-center gap-3 mb-6 font-serif">
+            <i class="fas fa-star text-orange-400"></i> Customer Reviews & Testimonials
+        </h2>
+
+        {% if reviews %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {% for rev in reviews %}
+            <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 space-y-2">
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-xs">{{ rev.author.name if rev.author else 'Verified Customer' }}</span>
+                    <div class="text-orange-400 text-xs">
+                        {% for i in range(rev.rating) %}<i class="fas fa-star"></i>{% endfor %}
+                    </div>
+                </div>
+                <p class="text-zinc-300 text-xs">{{ rev.review_text }}</p>
+                <div class="text-[10px] text-zinc-500">{{ rev.created_at.strftime('%d %b %Y') if rev.created_at else 'Recent' }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-6 text-zinc-500 text-xs">
+            No customer reviews yet. Reviews will automatically show up as clients complete sessions.
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

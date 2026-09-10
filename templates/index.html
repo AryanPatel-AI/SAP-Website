@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}Studioza - Find the Perfect Lens{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="home" class="relative h-[90vh] flex items-center justify-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 w-full h-full">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2940&auto=format&fit=crop" 
+             alt="Canon Camera" 
+             class="w-full h-full object-cover object-center opacity-40">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-16">
+        <span class="text-teal-400 font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Elevate Your Visual Story</span>
+        <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 font-serif leading-tight">
+            Find the Perfect <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-600">Studio & Photographer</span>
+        </h1>
+        <p class="mt-4 text-xl text-zinc-300 max-w-2xl mx-auto mb-10 font-light">
+            Studioza connects visionary creatives with premium spaces and expert photographers worldwide.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{{ url_for('list_studios') }}" class="btn-primary text-white px-8 py-4 rounded-sm text-lg font-bold shadow-lg">
+                Explore Studios
+            </a>
+            <a href="#about" class="bg-zinc-800/80 hover:bg-zinc-700 text-white border border-zinc-700 px-8 py-4 rounded-sm text-lg font-bold transition-all backdrop-blur-sm">
+                Our Mission
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-24 relative border-b border-gray-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-sm font-semibold">
+                    <i class="fas fa-camera"></i> About Studioza
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-white font-serif leading-tight">
+                    More than just a booking platform. <br/><span class="text-zinc-500">It's a creative ecosystem.</span>
+                </h2>
+                <p class="text-zinc-400 text-lg leading-relaxed">
+                    We believe that every great photograph starts with the right environment and the right talent. Studioza was built to bridge the gap between creative professionals and those seeking extraordinary visual content.
+                </p>
+                <p class="text-zinc-400 text-lg leading-relaxed">
+                    Whether you need a sunlit loft for a fashion editorial, a cyc-wall for commercial product shoots, or an expert photographer to capture your wedding, Studioza brings it all into one seamless experience.
+                </p>
+                <div class="pt-4 flex gap-6">
+                    <div class="text-center">
+                        <h4 class="text-3xl font-bold text-teal-400 font-serif">500+</h4>
+                        <span class="text-zinc-500 text-sm">Premium Studios</span>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-3xl font-bold text-teal-400 font-serif">10k+</h4>
+                        <span class="text-zinc-500 text-sm">Photoshoots Booked</span>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-3xl font-bold text-teal-400 font-serif">4.9/5</h4>
+                        <span class="text-zinc-500 text-sm">Average Rating</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative h-[600px] w-full rounded-sm overflow-hidden group">
+                <div class="absolute inset-0 bg-teal-500/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-500"></div>
+                <img src="https://images.unsplash.com/photo-1554046920-90dcac824ab8?q=80&w=2836&auto=format&fit=crop" alt="Photographer at work" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Photography Categories / Bookings -->
+<section id="categories" class="py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 font-serif">Photography Tailored to You</h2>
+            <p class="text-zinc-400 max-w-2xl mx-auto">Discover specialized studios and professionals perfectly equipped for your specific creative needs.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Category 1 -->
+            <a href="{{ url_for('list_studios') }}" class="group relative h-96 overflow-hidden rounded-sm cursor-pointer border border-gray-800/40">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2938&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8 w-full">
+                    <h3 class="text-2xl font-bold text-white font-serif mb-2">Wedding & Portrait</h3>
+                    <p class="text-zinc-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">Intimate spaces and natural light for capturing human emotion.</p>
+                </div>
+            </a>
+            
+            <!-- Category 2 -->
+            <a href="{{ url_for('list_studios') }}" class="group relative h-96 overflow-hidden rounded-sm cursor-pointer border border-gray-800/40">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2940&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8 w-full">
+                    <h3 class="text-2xl font-bold text-white font-serif mb-2">Commercial & Product</h3>
+                    <p class="text-zinc-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">Equipped with cyc-walls, props, and professional lighting rigs.</p>
+                </div>
+            </a>
+            
+            <!-- Category 3 -->
+            <a href="{{ url_for('list_studios') }}" class="group relative h-96 overflow-hidden rounded-sm cursor-pointer border border-gray-800/40">
+                <img src="https://images.unsplash.com/photo-1508182314998-3bd49473002f?q=80&w=2787&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8 w-full">
+                    <h3 class="text-2xl font-bold text-white font-serif mb-2">Fashion & Editorial</h3>
+                    <p class="text-zinc-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">Edgy, industrial, or extravagant spaces for high-end fashion shoots.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Trending Studios Section -->
+<section class="py-24 border-t border-gray-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-end mb-12 border-b border-gray-800/50 pb-6">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white font-serif">Trending Studios</h2>
+                <p class="text-zinc-400 mt-2">Highly rated spaces available for booking right now.</p>
+            </div>
+            <a href="{{ url_for('list_studios') }}" class="hidden sm:flex text-teal-400 hover:text-teal-300 font-semibold items-center gap-2 group">
+                View All <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for studio in studios %}
+            <div class="glass-card rounded-xl overflow-hidden group hover:border-teal-500/50 transition-colors">
+                <div class="relative h-64 overflow-hidden">
+                    {% if studio.image_filename %}
+                        <img src="{{ url_for('static', filename='image/' + studio.image_filename) }}" alt="{{ studio.name }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    {% else %}
+                        <div class="w-full h-full bg-zinc-800 flex items-center justify-center">
+                            <i class="fas fa-camera text-4xl text-zinc-600"></i>
+                        </div>
+                    {% endif %}
+                    <div class="absolute top-4 right-4 bg-zinc-900/90 backdrop-blur text-teal-400 px-3 py-1 rounded-sm text-sm font-bold border border-zinc-700">
+                        ${{ studio.price_per_hour }}/hr
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2 font-serif">{{ studio.name }}</h3>
+                    <p class="text-zinc-400 text-sm mb-4 line-clamp-2">{{ studio.description }}</p>
+                    
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-zinc-800">
+                        <div class="text-sm text-zinc-300">
+                            <i class="fas fa-map-marker-alt text-teal-400 mr-1"></i> {{ studio.location }}
+                        </div>
+                        <a href="{{ url_for('studio_detail', studio_id=studio.id) }}" class="text-teal-400 hover:text-teal-300 font-semibold text-sm">
+                            View Details &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-span-full text-center py-12">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-zinc-800 text-zinc-500 mb-4">
+                    <i class="fas fa-camera text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-zinc-300 mb-2">No studios available yet</h3>
+                <p class="text-zinc-500 mb-6">Are you a studio owner? List your space today.</p>
+                <a href="{{ url_for('register') }}" class="btn-primary text-white px-6 py-2 rounded-sm text-sm font-bold">Register as Owner</a>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="mt-8 text-center sm:hidden">
+            <a href="{{ url_for('list_studios') }}" class="text-teal-400 hover:text-teal-300 font-semibold inline-flex items-center gap-2 group">
+                View All Studios <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

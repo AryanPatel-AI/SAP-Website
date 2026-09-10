@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+{% block title %}{{ studio.name }} - Studioza{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Studio Header Banner -->
+    <div class="glass-card rounded-3xl p-6 sm:p-10 mb-10 relative overflow-hidden flex flex-col md:flex-row gap-8 items-center border border-zinc-800 shadow-2xl">
+        <!-- Ambient subtle glow -->
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-teal-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-orange-600/15 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <!-- Studio Cover Avatar -->
+        <div class="w-32 h-32 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border-2 border-zinc-700 shadow-2xl flex-shrink-0 bg-zinc-800 flex items-center justify-center">
+            {% if studio.cover_image %}
+                <img src="{{ studio.cover_image }}" alt="{{ studio.name }}" class="w-full h-full object-cover">
+            {% else %}
+                <i class="fas fa-camera text-5xl text-zinc-600"></i>
+            {% endif %}
+        </div>
+        
+        <!-- Studio Overview -->
+        <div class="flex-grow text-center md:text-left relative z-10">
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-teal-500/15 text-teal-300 text-xs font-semibold border border-teal-500/30">
+                    <i class="fas fa-check-circle text-teal-400 text-[10px]"></i> Verified Production Host
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-orange-500/15 text-orange-300 text-xs font-bold border border-orange-500/30">
+                    <i class="fas fa-star text-orange-400 text-[10px]"></i> {{ studio.average_rating }} ({{ studio.review_count }} Reviews)
+                </span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white font-serif tracking-tight mb-3">{{ studio.name }}</h1>
+            
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs sm:text-sm text-zinc-300 font-semibold mb-4">
+                <span class="flex items-center"><i class="fas fa-location-dot text-rose-400 mr-1.5"></i> {{ studio.location or studio.city }}</span>
+                <span class="hidden md:inline text-zinc-700">•</span>
+                <span class="flex items-center font-mono text-teal-400 text-base font-bold">
+                    <i class="fas fa-indian-rupee-sign text-teal-400 mr-1"></i> {{ studio.price_per_hour|int }}/hour
+                </span>
+                <span class="hidden md:inline text-zinc-700">•</span>
+                <span class="flex items-center text-zinc-400"><i class="fas fa-layer-group text-orange-400 mr-1.5"></i> {{ studio.category }}</span>
+            </div>
+
+            <p class="text-zinc-300 max-w-2xl text-sm sm:text-base leading-relaxed font-light">{{ studio.description or 'No description provided.' }}</p>
+
+            {% if studio.amenities %}
+            <div class="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
+                {% for amenity in studio.amenities.split(',') %}
+                <span class="text-[11px] bg-zinc-900/90 text-zinc-300 border border-zinc-700 px-2.5 py-1 rounded-md">
+                    <i class="fas fa-check text-teal-400 mr-1 text-[10px]"></i> {{ amenity.strip() }}
+                </span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        
+        <!-- Left 2 Cols: Portfolios & Reviews -->
+        <div class="lg:col-span-2 space-y-10">
+            
+                <!-- Previous Work Section Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white font-serif flex items-center gap-3">
+                            <i class="fas fa-images text-teal-400"></i> Previous Work & Production Portfolio
+                        </h2>
+                        <p class="text-xs text-zinc-400 mt-1">Authentic client shoots, fashion editorials, and commercial campaigns produced at this studio.</p>
+                    </div>
+                    {% if portfolios %}
+                    <span class="text-xs font-bold font-mono text-teal-400 bg-teal-500/10 border border-teal-500/20 px-3 py-1 rounded-full">
+                        {{ portfolios|length }} Works Showcased
+                    </span>
+                    {% endif %}
+                </div>
+                
+                {% if portfolios %}
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {% for item in portfolios %}
+                    <div class="glass-card rounded-2xl overflow-hidden border border-zinc-800 shadow-xl flex flex-col group hover:border-teal-500/40 transition-all duration-300">
+                        <div class="h-64 relative overflow-hidden bg-zinc-900">
+                            <img src="{{ item.image_url }}" alt="{{ item.caption }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            {% if item.category %}
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur border border-zinc-700/80 px-2.5 py-1 rounded-full text-[10px] font-bold text-teal-300 uppercase tracking-wider">
+                                {{ item.category }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="p-4 flex-grow flex flex-col justify-between space-y-2.5 bg-zinc-900/40">
+                            <div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-teal-300 transition-colors">{{ item.caption }}</h4>
+                                {% if item.details %}
+                                <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed bg-zinc-900/80 p-2.5 rounded-xl border border-zinc-800 font-light">
+                                    <i class="fas fa-camera text-teal-400 mr-1 text-[11px]"></i> {{ item.details }}
+                                </p>
+                                {% endif %}
+                            </div>
+                            {% if item.hashtags %}
+                            <div class="pt-2 border-t border-zinc-800/80 text-[11px] font-mono text-teal-400/90">
+                                {{ item.hashtags }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="glass-card p-10 text-center rounded-2xl border border-zinc-800 border-dashed">
+                    <i class="fas fa-camera text-4xl text-zinc-600 mb-3"></i>
+                    <h3 class="text-lg font-bold text-zinc-300 mb-1">Portfolio In Curation</h3>
+                    <p class="text-zinc-500 text-xs">Host is currently uploading new high-resolution studio shots.</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Customer Reviews & Ratings System -->
+            <div class="pt-6 border-t border-zinc-800">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white font-serif flex items-center gap-3">
+                            <i class="fas fa-star text-orange-400"></i> Verified Customer Reviews
+                        </h2>
+                        <p class="text-xs text-zinc-400 mt-1">Authentic ratings from directors, photographers, and producers.</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-2xl font-black text-white font-mono">{{ studio.average_rating }}</span>
+                        <span class="text-sm text-zinc-400">/ 5.0</span>
+                        <div class="text-[11px] text-zinc-500">{{ studio.review_count }} verified ratings</div>
+                    </div>
+                </div>
+
+                <!-- Existing Reviews List -->
+                <div class="space-y-4 mb-8">
+                    {% for rev in reviews %}
+                    <div class="glass-card p-5 rounded-xl border border-zinc-800 shadow-md space-y-2">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-teal-500 to-orange-500 flex items-center justify-center text-xs font-bold text-white">
+                                    {{ rev.author.name[0] if rev.author else 'C' }}
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">{{ rev.author.name if rev.author else 'Verified Creator' }}</h4>
+                                    <span class="text-[10px] text-zinc-400">{{ rev.created_at.strftime('%b %d, %Y') if rev.created_at else 'Recent' }}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-orange-400 text-xs gap-0.5">
+                                {% for i in range(rev.rating) %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                                {% for i in range(5 - rev.rating) %}
+                                    <i class="far fa-star text-zinc-600"></i>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <p class="text-xs text-zinc-300 leading-relaxed pl-11">{{ rev.review_text }}</p>
+                    </div>
+                    {% else %}
+                    <div class="glass-card p-6 rounded-xl border border-zinc-800 text-center text-zinc-400 text-xs">
+                        No written reviews yet. Be the first creator to review this studio!
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Add Review Form (for logged-in customers) -->
+                {% if session.get('user_id') and session.get('role') == 'customer' %}
+                <form action="{{ url_for('add_review', studio_id=studio.id) }}" method="POST" class="glass-card p-6 rounded-2xl border border-zinc-700/80 space-y-4">
+                    <h4 class="text-base font-bold text-white font-serif flex items-center gap-2">
+                        <i class="fas fa-pen-to-square text-teal-400"></i> Leave a 5-Star Rating & Review
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                        <div>
+                            <label class="block text-xs font-semibold text-zinc-300 mb-1">Your Rating</label>
+                            <select name="rating" class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-500">
+                                <option value="5">★★★★★ (5 - Exceptional)</option>
+                                <option value="4">★★★★☆ (4 - Very Good)</option>
+                                <option value="3">★★★☆☆ (3 - Average)</option>
+                                <option value="2">★★☆☆☆ (2 - Poor)</option>
+                                <option value="1">★☆☆☆☆ (1 - Terrible)</option>
+                            </select>
+                        </div>
+                        <div class="text-xs text-zinc-400">
+                            Your feedback helps other visual storytellers choose the right studio gear and space.
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-zinc-300 mb-1">Review Feedback</label>
+                        <textarea name="review_text" rows="3" required placeholder="Describe your experience: lighting quality, host cooperation, acoustics, power supply..." class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-teal-500 transition-colors resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-dual px-6 py-2.5 rounded-xl font-bold text-xs text-white shadow-lg cursor-pointer">
+                        Submit Review
+                    </button>
+                </form>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <!-- Right 1 Col: Booking Sidebar with Live INR Calculation -->
+        <div class="lg:col-span-1">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 sticky top-28 border border-zinc-700/80 shadow-2xl space-y-6">
+                <div>
+                    <div class="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Hourly Rental</div>
+                    <div class="text-3xl font-extrabold text-teal-400 font-mono mt-1">
+                        ₹{{ studio.price_per_hour|int }}<span class="text-sm text-zinc-400 font-normal"> / hour</span>
+                    </div>
+                </div>
+
+                <!-- Direct Studio Contact & Location Card -->
+                <div class="bg-zinc-900/90 p-4 rounded-2xl border border-zinc-700/80 space-y-3">
+                    <div class="text-[11px] font-bold text-zinc-400 uppercase tracking-wider flex items-center justify-between">
+                        <span><i class="fas fa-address-book text-teal-400 mr-1.5"></i> Direct Host Contact</span>
+                        <span class="text-[10px] text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">Verified</span>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <a href="tel:{{ studio.display_phone }}" class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/80 text-xs font-semibold text-white transition-colors group">
+                            <span class="flex items-center gap-2"><i class="fas fa-phone text-teal-400 group-hover:scale-110 transition-transform"></i> Call Studio</span>
+                            <span class="font-mono text-teal-300 font-bold">{{ studio.display_phone }}</span>
+                        </a>
+                        <a href="mailto:{{ studio.display_email }}" class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/80 text-xs font-semibold text-white transition-colors group">
+                            <span class="flex items-center gap-2"><i class="fas fa-envelope text-orange-400 group-hover:scale-110 transition-transform"></i> Email Studio</span>
+                            <span class="text-zinc-300 truncate max-w-[140px] text-[11px]">{{ studio.display_email }}</span>
+                        </a>
+                    </div>
+
+                    <div class="pt-2 border-t border-zinc-800 text-xs text-zinc-300 space-y-1">
+                        <div class="flex items-start gap-1.5">
+                            <i class="fas fa-location-dot text-rose-400 mt-1 flex-shrink-0 text-xs"></i>
+                            <span class="leading-snug text-[11px] text-zinc-300">{{ studio.location or studio.city }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-zinc-800 pt-4">
+                    <h3 class="text-xl font-bold text-white font-serif mb-1">Reserve Session</h3>
+                    <p class="text-xs text-zinc-400 mb-4">Select shoot date and duration to reserve this space directly with the host.</p>
+                    
+                    {% if session.get('user_id') %}
+                        {% if session.get('role') == 'customer' %}
+                            <form action="{{ url_for('book_studio', studio_id=studio.id) }}" method="POST" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-zinc-300 mb-1">Select Shoot Date</label>
+                                    <input type="date" name="booking_date" required class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-teal-500 transition-colors">
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-zinc-300 mb-1">Duration (Hours)</label>
+                                    <select name="hours" id="durationHours" class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-teal-500 transition-colors">
+                                        <option value="2">2 Hours (Test / Quick Shoot)</option>
+                                        <option value="4" selected>4 Hours (Half-Day Session)</option>
+                                        <option value="8">8 Hours (Full-Day Production)</option>
+                                        <option value="12">12 Hours (Commercial Marathon)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-zinc-300 mb-1">Production Notes (Optional)</label>
+                                    <textarea name="notes" rows="2" placeholder="Gear needed, crew size, talent details..." class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-teal-500 transition-colors resize-none"></textarea>
+                                </div>
+
+                                <!-- Dynamic Total in INR -->
+                                <div class="bg-zinc-900/90 p-4 rounded-xl border border-zinc-800 space-y-1">
+                                    <div class="flex justify-between text-xs text-zinc-400">
+                                        <span>Estimated Total:</span>
+                                        <span id="priceDisplay" class="font-mono font-bold text-teal-400 text-sm">
+                                            ₹{{ (studio.price_per_hour * 4)|int }}
+                                        </span>
+                                    </div>
+                                    <div class="text-[10px] text-zinc-500">Includes space access and host concierge in ₹ INR</div>
+                                </div>
+
+                                <button type="submit" class="w-full btn-dual text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 text-sm shadow-xl cursor-pointer">
+                                    <i class="fas fa-calendar-check text-xs"></i>
+                                    <span>Confirm Booking Request</span>
+                                </button>
+                            </form>
+
+                            <script>
+                            document.getElementById('durationHours').addEventListener('change', function() {
+                                const rate = {{ studio.price_per_hour }};
+                                const hours = parseInt(this.value);
+                                const total = rate * hours;
+                                document.getElementById('priceDisplay').textContent = '₹' + total.toLocaleString('en-IN');
+                            });
+                            </script>
+
+                        {% else %}
+                            <div class="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4 text-center">
+                                <i class="fas fa-store text-orange-400 mb-2 text-xl"></i>
+                                <p class="text-orange-300 text-xs font-semibold">You are logged in as a Studio Host. Use a customer account to book spaces.</p>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 text-center space-y-3">
+                            <i class="fas fa-user-lock text-zinc-500 text-2xl"></i>
+                            <p class="text-zinc-300 text-xs font-semibold">Sign in to book this studio and reserve hours in ₹ INR.</p>
+                            <a href="{{ url_for('login') }}" class="inline-block w-full btn-dual text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+                                Sign In to Reserve
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="border-t border-zinc-800 pt-4 space-y-2 text-[11px] text-zinc-400">
+                    <div class="flex items-center gap-2"><i class="fas fa-bolt text-teal-400"></i> Fast host response & confirmation</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-handshake text-orange-400"></i> Direct host booking in ₹ INR</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-rotate-left text-teal-400"></i> Free 24h cancellation guarantee</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

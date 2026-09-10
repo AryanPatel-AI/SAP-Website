@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Register - Studioza{% endblock %}
+
+{% block content %}
+<div class="min-h-[80vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+    <div class="glass-card max-w-lg w-full rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+        <!-- Decorative Glow -->
+        <div class="absolute -top-20 -left-20 w-40 h-40 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[40px]"></div>
+        <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-indigo-500/20 rounded-full mix-blend-screen filter blur-[40px]"></div>
+        
+        <div class="text-center relative z-10">
+            <h2 class="mt-2 text-3xl font-black text-white tracking-tight">Create an Account</h2>
+            <p class="mt-2 text-sm text-slate-400 font-medium">Join the marketplace as a Customer or Studio</p>
+        </div>
+
+        <form class="mt-10 space-y-6 relative z-10" action="{{ url_for('register') }}" method="POST">
+            
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <label class="cursor-pointer relative">
+                    <input type="radio" name="role" value="customer" class="peer sr-only" checked>
+                    <div class="text-center p-4 rounded-xl border border-slate-700 bg-slate-800/50 text-slate-400 font-bold peer-checked:border-indigo-500 peer-checked:text-white peer-checked:bg-indigo-500/20 transition-all hover:bg-slate-800">
+                        <i class="fas fa-user mb-2 text-xl block"></i>
+                        Customer
+                    </div>
+                </label>
+                <label class="cursor-pointer relative">
+                    <input type="radio" name="role" value="studio" class="peer sr-only">
+                    <div class="text-center p-4 rounded-xl border border-slate-700 bg-slate-800/50 text-slate-400 font-bold peer-checked:border-purple-500 peer-checked:text-white peer-checked:bg-purple-500/20 transition-all hover:bg-slate-800">
+                        <i class="fas fa-camera mb-2 text-xl block"></i>
+                        Studio Owner
+                    </div>
+                </label>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-bold text-slate-300 ml-1 mb-1">Full Name</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-id-badge text-slate-500"></i>
+                        </div>
+                        <input id="name" name="name" type="text" required class="appearance-none relative block w-full px-3 py-3.5 pl-11 bg-slate-900/50 border border-slate-700 placeholder-slate-500 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm transition-all" placeholder="John Doe">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="email" class="block text-sm font-bold text-slate-300 ml-1 mb-1">Email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-slate-500"></i>
+                            </div>
+                            <input id="email" name="email" type="email" required class="appearance-none relative block w-full px-3 py-3.5 pl-11 bg-slate-900/50 border border-slate-700 placeholder-slate-500 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm transition-all" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-bold text-slate-300 ml-1 mb-1">Phone Number</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-phone text-slate-500"></i>
+                            </div>
+                            <input id="phone" name="phone" type="tel" required class="appearance-none relative block w-full px-3 py-3.5 pl-11 bg-slate-900/50 border border-slate-700 placeholder-slate-500 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm transition-all" placeholder="123-456-7890">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-bold text-slate-300 ml-1 mb-1">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-slate-500"></i>
+                        </div>
+                        <input id="password" name="password" type="password" required class="appearance-none relative block w-full px-3 py-3.5 pl-11 bg-slate-900/50 border border-slate-700 placeholder-slate-500 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm transition-all" placeholder="••••••••">
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button type="submit" class="group relative w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-bold rounded-xl text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-slate-900">
+                    Create Account
+                </button>
+            </div>
+        </form>
+        
+        <div class="mt-8 text-center relative z-10 border-t border-slate-700 pt-6">
+            <p class="text-sm text-slate-400 font-medium">
+                Already have an account? 
+                <a href="{{ url_for('login') }}" class="font-bold text-indigo-400 hover:text-indigo-300 transition-colors">Sign in</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Studioza{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #030712, #18181b, #1c1917); /* gray-950 via zinc-900 to stone-900 */
+            background-attachment: fixed;
+            color: #ffffff;
+        }
+        
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glass-nav {
+            background: rgba(3, 7, 18, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-card {
+            background: rgba(24, 24, 27, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(20, 184, 166, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px -10px rgba(13, 148, 136, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 4px 20px rgba(13, 148, 136, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-warm {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-warm:hover {
+            box-shadow: 0 4px 20px rgba(234, 88, 12, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-dual {
+            background: linear-gradient(135deg, #0d9488 0%, #ea580c 100%);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dual:hover {
+            box-shadow: 0 4px 24px rgba(234, 88, 12, 0.35);
+            transform: translateY(-2px);
+        }
+        
+        .text-dual {
+            background: linear-gradient(135deg, #2dd4bf 0%, #fb923c 60%, #f87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.32; transform: scale(1.08); }
+        }
+
+        .animate-glow-teal {
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        .animate-glow-warm {
+            animation: pulseGlow 10s ease-in-out infinite 2s;
+        }
+
+        /* Camera Flash Animation: Realistic dual-strobe burst */
+        @keyframes cameraFlash {
+            0%, 88%, 100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+            89% {
+                opacity: 0.45;
+                transform: scale(1.02);
+            }
+            90% {
+                opacity: 0.08;
+            }
+            91% {
+                opacity: 0.85;
+                transform: scale(1.05);
+            }
+            92% {
+                opacity: 0.12;
+            }
+            93% {
+                opacity: 0.55;
+            }
+            94% {
+                opacity: 0;
+                transform: scale(1);
+            }
+        }
+
+        .animate-camera-flash {
+            animation: cameraFlash 7.5s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
+        }
+
+        /* Lens Zoom In / Zoom Out Animation */
+        @keyframes lensZoomInOut {
+            0%, 100% {
+                transform: scale(0.92);
+            }
+            50% {
+                transform: scale(1.18);
+            }
+        }
+
+        .animate-lens-zoom {
+            animation: lensZoomInOut 11s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col bg-gradient-to-br from-gray-950 via-zinc-900 to-stone-900 text-white selection:bg-teal-500/30 selection:text-teal-200">
+
+    <!-- Background glow & optical effects (Dual tone: Teal & Warm Reddish-Orange with Camera Flash & Lens Zoom) -->
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <!-- Camera Flash Burst Strobe Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-teal-200/25 via-white/20 to-orange-400/25 opacity-0 pointer-events-none animate-camera-flash"></div>
+
+        <!-- Ambient Concentric Optical Lens Zoom Rings -->
+        <div class="absolute inset-0 flex items-center justify-center animate-lens-zoom pointer-events-none">
+            <div class="w-[60rem] h-[60rem] rounded-full border border-teal-500/10 opacity-40"></div>
+            <div class="w-[45rem] h-[45rem] rounded-full border border-orange-500/10 opacity-35"></div>
+            <div class="w-[30rem] h-[30rem] rounded-full border border-teal-400/15 opacity-40"></div>
+        </div>
+
+        <!-- Teal ambient glow (top-left) with breathing lens zoom -->
+        <div class="absolute -top-10 left-1/4 w-[32rem] h-[32rem] bg-teal-500/20 rounded-full blur-3xl animate-glow-teal animate-lens-zoom"></div>
+        <!-- Warm reddish-orange ambient glow (bottom-right) with breathing lens zoom -->
+        <div class="absolute -bottom-10 right-1/4 w-[34rem] h-[34rem] bg-orange-600/20 rounded-full blur-3xl animate-glow-warm animate-lens-zoom"></div>
+        <!-- Center camera flash focus flare -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-teal-300/15 rounded-full blur-3xl animate-camera-flash pointer-events-none"></div>
+        <!-- Center-left subtle reddish accent -->
+        <div class="absolute top-1/2 left-10 -translate-y-1/2 w-80 h-80 bg-rose-600/10 rounded-full blur-3xl"></div>
+        <!-- Center-right subtle teal accent -->
+        <div class="absolute top-1/3 right-10 w-96 h-96 bg-teal-700/15 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="{{ url_for('index') }}" class="flex items-center gap-3 group" title="Return to Animated Front Page">
+                        <div class="relative w-11 h-11 rounded-xl overflow-hidden p-0.5 bg-gradient-to-tr from-teal-500 via-zinc-800 to-orange-500 shadow-md group-hover:shadow-[0_0_20px_rgba(20,184,166,0.5)] transition-all">
+                            <img src="{{ url_for('static', filename='image/camera_logo.jpg') }}" alt="Studioza Camera Logo" class="w-full h-full object-cover rounded-[10px] group-hover:scale-110 transition-transform duration-300">
+                        </div>
+                        <span class="font-serif font-extrabold text-2xl tracking-tight text-white">Studio<span class="text-teal-400">za</span></span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{{ url_for('home') }}" class="text-sm font-semibold text-zinc-300 hover:text-teal-400 transition-colors flex items-center gap-1.5">
+                        <i class="fas fa-home text-xs text-teal-400"></i> Home
+                    </a>
+                    <a href="{{ url_for('list_studios') }}" class="text-sm font-semibold text-zinc-400 hover:text-white transition-colors">Studios</a>
+                    <a href="{{ url_for('categories') }}" class="text-sm font-semibold text-zinc-400 hover:text-white transition-colors">Categories</a>
+                    <a href="{{ url_for('about') }}" class="text-sm font-semibold text-zinc-400 hover:text-white transition-colors">About</a>
+                    <a href="{{ url_for('contact') }}" class="text-sm font-semibold text-zinc-400 hover:text-orange-400 transition-colors">Contact</a>
+                    
+                    {% if session.get('user_id') %}
+                        <a href="{{ url_for('dashboard') }}" class="text-sm font-semibold text-teal-400 hover:text-teal-300 transition-colors">My Bookings</a>
+                        <div class="h-6 w-px bg-zinc-800"></div>
+                        <span class="text-sm text-zinc-500">Hi, {{ session.get('name') }}</span>
+                        <a href="{{ url_for('logout') }}" class="text-sm font-semibold text-rose-400 hover:text-rose-300 transition-colors">Logout</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="text-sm font-semibold text-zinc-400 hover:text-white transition-colors">Sign In</a>
+                        <a href="{{ url_for('register') }}" class="btn-primary px-5 py-2.5 rounded-sm text-sm font-bold tracking-wide">Get Started</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="fixed top-24 left-0 right-0 z-40 px-4 pointer-events-none flex flex-col items-center gap-2">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="pointer-events-auto rounded-sm px-6 py-3 shadow-2xl backdrop-blur-md border animate-[bounce_0.5s_ease-out]
+                        {% if category == 'error' %} bg-rose-950/80 border-rose-900 text-rose-300
+                        {% else %} bg-teal-950/80 border-teal-800 text-teal-300 {% endif %}">
+                        <i class="fas {% if category == 'error' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %} mr-2"></i>
+                        <span class="font-semibold text-sm">{{ message }}</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-20 relative z-10 min-h-[70vh]">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/50 py-8 px-6 max-w-7xl mx-auto w-full mt-auto relative z-10">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2.5 text-zinc-400">
+                <img src="{{ url_for('static', filename='image/camera_logo.jpg') }}" alt="Studioza Camera Logo" class="w-6 h-6 rounded-md object-cover">
+                <span class="font-serif font-bold text-white text-base">Studio<span class="text-teal-400">za</span></span>
+            </div>
+            <div class="text-sm text-gray-400">
+                Made with ❤️ by Aryan Patel
+            </div>
+            <div class="text-xs text-gray-500">
+                &copy; 2026 Studioza. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Widget -->
+    <div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div id="chat-window" class="hidden w-80 sm:w-96 glass-card rounded-xl shadow-2xl mb-4 border border-slate-700 overflow-hidden flex flex-col h-96 transition-all duration-300 transform origin-bottom-right scale-95 opacity-0">
+            <!-- Header -->
+            <div class="bg-slate-800 border-b border-slate-700 px-4 py-3 flex justify-between items-center text-slate-100">
+                <div class="flex items-center gap-2 font-bold font-serif">
+                    <i class="fas fa-robot text-teal-500"></i> Studioza Assistant
+                </div>
+                <button id="close-chat" class="hover:text-teal-500 transition-colors"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <!-- Messages Area -->
+            <div id="chat-messages" class="flex-grow p-4 overflow-y-auto bg-slate-900 flex flex-col gap-3 text-sm">
+                <!-- Welcome Message -->
+                <div class="bg-slate-800 border border-slate-700 text-slate-200 rounded-lg rounded-tl-none px-4 py-3 max-w-[85%] self-start shadow-sm">
+                    Hi there! 👋 I'm your AI photography assistant. Looking for a studio or need some photo tips?
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="p-3 bg-slate-800 border-t border-slate-700 flex gap-2">
+                <input type="text" id="chat-input" placeholder="Ask me anything..." class="flex-grow bg-slate-900 border border-slate-700 rounded-sm px-3 py-2 text-slate-100 text-sm focus:outline-none focus:border-teal-500 transition-colors" autocomplete="off">
+                <button id="send-chat" class="bg-teal-600 hover:bg-teal-500 text-white rounded-sm px-4 py-2 transition-colors flex items-center justify-center">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <button id="toggle-chat" class="w-14 h-14 rounded-full btn-primary text-white text-xl flex items-center justify-center shadow-2xl hover:scale-105 transition-transform">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <script>
+        const chatWidget = document.getElementById('ai-chat-widget');
+        const chatWindow = document.getElementById('chat-window');
+        const toggleBtn = document.getElementById('toggle-chat');
+        const closeBtn = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-chat');
+        const messagesArea = document.getElementById('chat-messages');
+
+        let chatHistory = [];
+
+        function toggleWindow() {
+            if (chatWindow.classList.contains('hidden')) {
+                chatWindow.classList.remove('hidden');
+                setTimeout(() => {
+                    chatWindow.classList.remove('scale-95', 'opacity-0');
+                    chatWindow.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            } else {
+                chatWindow.classList.remove('scale-100', 'opacity-100');
+                chatWindow.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => chatWindow.classList.add('hidden'), 300);
+            }
+        }
+
+        toggleBtn.addEventListener('click', toggleWindow);
+        closeBtn.addEventListener('click', toggleWindow);
+
+        function addMessage(text, isUser) {
+            const div = document.createElement('div');
+            div.className = isUser 
+                ? 'bg-teal-600 text-white rounded-lg rounded-tr-none px-4 py-3 max-w-[85%] self-end shadow-sm'
+                : 'bg-slate-800 border border-slate-700 text-slate-200 rounded-lg rounded-tl-none px-4 py-3 max-w-[85%] self-start shadow-sm';
+            
+            div.innerText = text;
+            messagesArea.appendChild(div);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            
+            chatInput.value = '';
+            addMessage(text, true);
+            chatHistory.push({ role: 'user', content: text });
+
+            // Add typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = 'text-slate-500 text-xs self-start px-2 italic';
+            typingDiv.innerText = 'AI is typing...';
+            messagesArea.appendChild(typingDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ messages: chatHistory })
+                });
+                
+                const data = await response.json();
+                
+                // Remove typing indicator
+                document.getElementById('typing-indicator')?.remove();
+                
+                addMessage(data.response, false);
+                chatHistory.push({ role: 'model', content: data.response });
+                
+            } catch (err) {
+                document.getElementById('typing-indicator')?.remove();
+                addMessage('Sorry, I am having trouble connecting.', false);
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>

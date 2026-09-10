@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Contact & Concierge - Studioza{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <i class="fas fa-headset text-orange-400"></i> Production Concierge
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white font-serif mb-6 leading-tight">
+            Let's Bring Your Next <br/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-teal-300 to-orange-400">
+                Shoot to Life
+            </span>
+        </h1>
+        <p class="text-zinc-300 text-lg leading-relaxed font-light">
+            Have questions about studio specifications, multi-day bookings, equipment rentals, or need help listing your space? Reach our production team directly.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+
+        <!-- Contact Information Cards (Left Col) -->
+        <div class="lg:col-span-5 space-y-6">
+            <div class="glass-card p-6 rounded-2xl border border-zinc-800/90 hover:border-teal-400/40 transition-all">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center text-xl">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Email Concierge</div>
+                        <div class="text-white font-bold text-base">support@studioza.com</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl border border-zinc-800/90 hover:border-orange-500/40 transition-all">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center text-xl">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Direct Production Line</div>
+                        <div class="text-white font-bold text-base">+1 (800) 555-STUDIO</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl border border-zinc-800/90 hover:border-teal-400/40 transition-all">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center text-xl">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Flagship Headquarters</div>
+                        <div class="text-white font-bold text-base">Arts & Design District, New York, NY</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-950 to-zinc-900 border border-zinc-800">
+                <h4 class="text-lg font-bold text-white font-serif mb-2 flex items-center gap-2">
+                    <i class="fas fa-key text-orange-400"></i> Are You a Studio Host?
+                </h4>
+                <p class="text-zinc-400 text-xs leading-relaxed mb-4">
+                    List your creative space on Studioza and get connected with verified filmmakers, photographers, and agencies worldwide.
+                </p>
+                <a href="{{ url_for('register') }}" class="btn-warm w-full py-2.5 rounded-lg text-center text-xs font-bold block">
+                    Register Your Space Today &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Contact Form (Right Col) -->
+        <div class="lg:col-span-7">
+            <div class="glass-card p-8 sm:p-10 rounded-3xl border border-zinc-800 relative overflow-hidden">
+                <div class="pointer-events-none absolute -top-20 -right-20 w-64 h-64 bg-teal-500/10 rounded-full blur-2xl"></div>
+
+                <h3 class="text-2xl font-bold text-white font-serif mb-2">Send Concierge a Message</h3>
+                <p class="text-zinc-400 text-sm mb-8">We typically reply within 2 hours during production hours (8am - 8pm EST).</p>
+
+                <form action="{{ url_for('contact') }}" method="POST" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Your Name</label>
+                            <input type="text" name="name" required placeholder="Jane Doe" class="w-full bg-zinc-900/80 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Email Address</label>
+                            <input type="email" name="email" required placeholder="jane@example.com" class="w-full bg-zinc-900/80 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-500 transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Phone Number</label>
+                            <input type="tel" name="phone" placeholder="+1 (555) 000-0000" class="w-full bg-zinc-900/80 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Shoot Category</label>
+                            <select name="category" class="w-full bg-zinc-900/80 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-500 transition-colors">
+                                <option value="portrait">Wedding & Portrait</option>
+                                <option value="commercial">Commercial / Product</option>
+                                <option value="fashion">Fashion & Editorial</option>
+                                <option value="automotive">Automotive / Large Set</option>
+                                <option value="culinary">Food & Culinary</option>
+                                <option value="video">Soundstage / Music Video</option>
+                                <option value="other">Other Inquiry</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Shoot Details & Requirements</label>
+                        <textarea name="message" rows="4" required placeholder="Tell us about your shoot dates, crew size, camera gear needs (Canon, lighting grids), and any specific questions..." class="w-full bg-zinc-900/80 border border-zinc-700 rounded-xl p-4 text-white text-sm focus:outline-none focus:border-teal-500 transition-colors"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-dual w-full py-4 rounded-xl font-bold text-base text-white shadow-xl flex items-center justify-center gap-2">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Submit Inquiry to Concierge</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Navigation Links -->
+    <div class="text-center pt-8 border-t border-zinc-800">
+        <h3 class="text-xl font-bold text-white font-serif mb-4">Continue Navigating Studioza</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="{{ url_for('home') }}" class="text-teal-400 hover:text-teal-300 text-sm font-bold flex items-center gap-1">
+                <i class="fas fa-th-large"></i> Main Hub
+            </a>
+            <span class="text-zinc-600">•</span>
+            <a href="{{ url_for('list_studios') }}" class="text-orange-400 hover:text-orange-300 text-sm font-bold flex items-center gap-1">
+                <i class="fas fa-store"></i> All Studios
+            </a>
+            <span class="text-zinc-600">•</span>
+            <a href="{{ url_for('categories') }}" class="text-teal-400 hover:text-teal-300 text-sm font-bold flex items-center gap-1">
+                <i class="fas fa-layer-group"></i> Categories
+            </a>
+            <span class="text-zinc-600">•</span>
+            <a href="{{ url_for('about') }}" class="text-orange-400 hover:text-orange-300 text-sm font-bold flex items-center gap-1">
+                <i class="fas fa-book-open"></i> About Us
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
